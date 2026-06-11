@@ -49,7 +49,7 @@ CDMs → LayerNorm + TimeEnc → InputProj → DepthwiseTCN → CrossAttn → Ri
                                                                    fleet priority)
 ```
 
-- **40K–140K params** (CPU-trainable, ~60s per epoch)
+- **40K–140K params** (CPU-trainable, ~90s per epoch)
 - **DepthwiseTCN** captures multi-scale temporal patterns across 6–15 sequential CDMs
 - **Prototype Distribution Module** learns risk archetypes via contrastive loss
 - **Production algorithm** filters by temporal consistency, fuel reserves, schedules maneuvers
@@ -62,11 +62,17 @@ pip install torch numpy pandas
 # Download ESA data (~9 GB)
 python download_data.py
 
-# Train on real data (100 epochs, 73% savings achieved)
+# Train on real data (100 epochs, 73% savings achieved, requires Python 3.10+)
 python run.py --mode train --data esa --epochs 100
+
+# Train with augmentation (reproduces our best result at epoch 10)
+python run.py --mode train --data esa --epochs 100 --augment jitter,mixup --aug-copies 5 --aug-synth 15000
 
 # Evaluate best model
 python run.py --mode eval --data esa
+
+# Calibrate decision thresholds for deployment
+python calibrate.py
 ```
 
 ## Project Structure
