@@ -5,12 +5,13 @@ AI-powered risk scoring + production decision algorithm — task #3 (automated C
 
 ## Why This Exists
 
-SpaceX's Starlink performed **50,000 collision avoidance maneuvers in six months (2024)**.  
-Each maneuver costs fuel and shortens satellite lifespan. Industry uses a fixed Pc threshold —  
-high false alarm rate, no ranking, no fuel awareness, no fleet priority.
+As Justin Styer and others in space traffic have been highlighting — Starlink hit **300,000 collision avoidance maneuvers in 2025**, on track for 1M/year by 2027.  
+Each maneuver burns fuel and shortens satellite lifespan. The industry standard is a fixed Pc threshold:  
+high false alarm rate, no learned ranking, no fuel-aware budgeting.
 
-COMET replaces that with a learned temporal risk model + rules-based algorithm that  
-reduces maneuvers by **73% while catching 100% of top-10 risks per batch.**
+COMET adds what no publicly documented system has: a learned temporal risk model that ranks conjunctions  
+by danger, a temporal consistency filter, fuel-aware decision logic, and fleet-wide priority.  
+Result: **73% fewer maneuvers while catching 100% of top-10 risks per batch.**
 
 ## Performance (ESA Kelvins Benchmark)
 
