@@ -3,8 +3,8 @@ import torch.nn as nn
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
 from config import (
-    BATCH_SIZE, LR, WEIGHT_DECAY, EPOCHS,
-    NUM_SYNTHETIC_EVENTS, RISK_RATIO, PROTO_DIM,
+    BATCH_SIZE, PHASE2_BACKBONE_LR as LR, PHASE2_WEIGHT_DECAY as WEIGHT_DECAY,
+    PHASE2_EPOCHS as EPOCHS, NUM_SYNTHETIC_EVENTS, RISK_RATIO, PROTO_DIM,
 )
 from cdm_generator import generate_dataset, generate_cdm_sequence
 from model import CDMRiskModel, ConjunctionContrastiveLoss, count_params

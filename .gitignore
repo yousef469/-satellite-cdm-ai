@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
-checkpoint_best.pt
 *.pt
 *.egg-info/
 dist/
@@ -9,3 +8,6 @@ build/
 env/
 venv/
 .DS_Store
+data/*.csv
+data/*.zip
+checkpoints/

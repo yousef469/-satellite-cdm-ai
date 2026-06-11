@@ -125,7 +125,12 @@ class CDMRiskModel(nn.Module):
         self.reasoning = CDMHead(HIDDEN_DIM, num_heads=2)
         self.pdm = PrototypeDistributionModule(HIDDEN_DIM, NUM_SUBSPACES, SUBSPACE_DIM, NUM_PROTOTYPES)
 
-        self.risk_head = nn.Linear(NUM_CDM_FEATURES, 1)
+        self.risk_head = nn.Sequential(
+            nn.Linear(HIDDEN_DIM, HIDDEN_DIM // 2),
+            nn.GELU(),
+            nn.Dropout(0.2),
+            nn.Linear(HIDDEN_DIM // 2, 1),
+        )
 
     def forward(self, cdm_seq, time_to_tca, mask=None):
         te = self.time_enc(time_to_tca.unsqueeze(-1))
@@ -136,17 +141,7 @@ class CDMRiskModel(nn.Module):
         pooled = self.reasoning(x, mask=mask)
         proto_logits, d = self.pdm(pooled)
 
-        # Risk from the LAST VALID CDM's raw features
-        if mask is not None:
-            # mask: True = padded position, False = real data
-            # Find last unmasked position for each sample in batch
-            lengths = (~mask).sum(dim=1, dtype=torch.long) - 1  # last valid index
-            lengths = lengths.clamp(min=0)
-            batch_idx = torch.arange(cdm_seq.shape[0], device=cdm_seq.device)
-            last_feats = cdm_seq[batch_idx, lengths]
-        else:
-            last_feats = cdm_seq[:, -1, :]
-        risk = self.risk_head(last_feats).squeeze(-1)
+        risk = self.risk_head(pooled).squeeze(-1)
 
         return proto_logits, risk, d
 
