@@ -5,7 +5,7 @@ AI-powered risk scoring + production decision algorithm — task #3 (automated C
 
 ## Why This Exists
 
-As Justin Styer and others in space traffic have been highlighting — Starlink hit **300,000 collision avoidance maneuvers in 2025**, on track for 1M/year by 2027.  
+Starlink hit **300,000 collision avoidance maneuvers in 2025**, on track for 1M/year by 2027.  
 Each maneuver burns fuel and shortens satellite lifespan. The industry standard is a fixed Pc threshold:  
 high false alarm rate, no learned ranking, no fuel-aware budgeting.
 
