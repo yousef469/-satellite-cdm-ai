@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 *.pt
 !checkpoints/*.pt
+.DS_Store
+.venv/
+data/
